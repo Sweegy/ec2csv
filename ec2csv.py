@@ -64,15 +64,15 @@ def volumes():
         for vol in json.load(h)['Volumes']:
             volumes.append(( vol['VolumeId'],
                              vol['CreateTime'],
-                             vol['AvailabilityZone'],
                              vol['Size'],
+                             vol['AvailabilityZone'],
                              vol['SnapshotId'],
                              vol['State'] ))
             for att in vol.get('Attachments', []):
-                attachments.append(( att['AttachTime'],
-                                     att['Device'],
+                attachments.append(( att['Device'],
                                      att['InstanceId'],
                                      att['VolumeId'],
+                                     att['AttachTime'],
                                      att['State'],
                                      att['DeleteOnTermination'] ))
             for tag in vol.get('Tags', []):
@@ -95,8 +95,8 @@ def snapshots(path='snapshot.json'):
     with open(path) as h:
         for snap in json.load(h)['Snapshots']:
             snapshots.append(( snap['SnapshotId'],
-                               snap['VolumeSize'],
                                snap['StartTime'],
+                               snap['VolumeSize'],
                                snap['VolumeId'],
                                snap['State'],
                                snap['Progress'],
