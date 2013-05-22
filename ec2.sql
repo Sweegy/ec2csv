@@ -36,17 +36,17 @@ CREATE TABLE snapshot
 
 CREATE TABLE instance_tag
 ( instance      text NOT NULL REFERENCES instance(instance),
-  attribute     text NOT NULL,
+  tag           text NOT NULL,
   value         text NOT NULL );
 
 CREATE TABLE volume_tag
 ( volume        text NOT NULL REFERENCES volume(volume),
-  attribute     text NOT NULL,
+  tag           text NOT NULL,
   value         text NOT NULL );
 
 CREATE TABLE snapshot_tag
 ( snapshot      text NOT NULL REFERENCES snapshot(snapshot),
-  attribute     text NOT NULL,
+  tag           text NOT NULL,
   value         text NOT NULL );
 
 CREATE TABLE attachment
