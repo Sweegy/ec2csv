@@ -1,8 +1,8 @@
 
-CREATE SCHEMA ec2;
+CREATE SCHEMA IF NOT EXISTS ec2;
 SET search_path TO ec2, "$user", public, pg_temp;
 
-CREATE TABLE instance
+CREATE TABLE IF NOT EXISTS instance
 ( instance      text PRIMARY KEY,
   t             timestamptz NOT NULL DEFAULT now(),
   az            text NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE instance
   priv_ip       inet NOT NULL,
   state         text NOT NULL );
 
-CREATE TABLE volume
+CREATE TABLE IF NOT EXISTS volume
 ( volume        text PRIMARY KEY,
   t             timestamptz NOT NULL DEFAULT now(),
   size          integer NOT NULL,
@@ -24,7 +24,7 @@ CREATE TABLE volume
   snapshot      text NOT NULL,
   state         text NOT NULL );
 
-CREATE TABLE snapshot
+CREATE TABLE IF NOT EXISTS snapshot
 ( snapshot      text PRIMARY KEY,
   t             timestamptz NOT NULL DEFAULT now(),
   size          integer NOT NULL,
@@ -34,22 +34,22 @@ CREATE TABLE snapshot
   description   text NOT NULL,
   owner         text NOT NULL );
 
-CREATE TABLE instance_tag
+CREATE TABLE IF NOT EXISTS instance_tag
 ( instance      text NOT NULL REFERENCES instance(instance),
   tag           text NOT NULL,
   value         text NOT NULL );
 
-CREATE TABLE volume_tag
+CREATE TABLE IF NOT EXISTS volume_tag
 ( volume        text NOT NULL REFERENCES volume(volume),
   tag           text NOT NULL,
   value         text NOT NULL );
 
-CREATE TABLE snapshot_tag
+CREATE TABLE IF NOT EXISTS snapshot_tag
 ( snapshot      text NOT NULL REFERENCES snapshot(snapshot),
   tag           text NOT NULL,
   value         text NOT NULL );
 
-CREATE TABLE attachment
+CREATE TABLE IF NOT EXISTS attachment
 ( dev           text NOT NULL,
   instance      text NOT NULL REFERENCES instance(instance),
   volume        text NOT NULL REFERENCES volume(volume),
@@ -57,7 +57,7 @@ CREATE TABLE attachment
   state         text NOT NULL,
   term_del      boolean NOT NULL );
 
-CREATE TABLE sg_membership
+CREATE TABLE IF NOT EXISTS sg_membership
 ( instance      text NOT NULL REFERENCES instance(instance),
   sg            text NOT NULL,
   name          text NOT NULL );
