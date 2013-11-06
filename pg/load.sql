@@ -9,4 +9,5 @@
 \copy snapshot_tag from sample/snapshot_tag.csv csv
 \copy attachment from sample/attachment.csv csv
 \copy sg_membership from sample/sg_membership.csv csv
+\copy net from sample/net.csv csv
 
